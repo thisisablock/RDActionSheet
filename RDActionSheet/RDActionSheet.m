@@ -80,8 +80,10 @@ const CGFloat kBlackoutViewFadeInOpacity = 0.6;
         }
                 
         // Build cancel button
-        UIButton *cancelButton = [self buildCancelButtonWithTitle:cancelButtonTitle];
-        [self.buttons insertObject:cancelButton atIndex:0];
+        if (cancelButtonTitle != nil) {
+            UIButton *cancelButton = [self buildCancelButtonWithTitle:cancelButtonTitle];
+            [self.buttons insertObject:cancelButton atIndex:0];
+        }
         
         // Add primary button
         if (primaryButtonTitle) {
@@ -227,6 +229,9 @@ const CGFloat kBlackoutViewFadeInOpacity = 0.6;
     view.backgroundColor = [UIColor blackColor];
     view.opaque = YES;
     view.alpha = 0;
+    
+    UITapGestureRecognizer* cancleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelActionSheet)];
+    [view addGestureRecognizer:cancleTap];
     
     return view;
 }
